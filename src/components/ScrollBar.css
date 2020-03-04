@@ -1,0 +1,6 @@
+.scrollbar{
+	margin: 0px 10px 0px 10px;
+	overflow: scroll;
+	height: 500px;
+	border: 2px solid red;
+}
