@@ -9,7 +9,8 @@ class App extends Component{
     super(props);
     this.state = {
       robots: [],
-      searchField: ''
+      searchField: '',
+      time: new Date()
     }
   }
 
@@ -17,14 +18,21 @@ class App extends Component{
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
       .then(users => this.setState({ robots: users }));
+      this.setState({ time: new Date() });
   }
 
   onSearchChange = (event) => {
     this.setState({ searchField: event.target.value });
   }
 
+  setTime = () => {
+    this.setState({ time: new Date() });
+  }
+
   render(){
-    const { robots, searchField } = this.state;
+    setInterval(this.setTime, 1000);
+
+    const { robots, searchField, time } = this.state;
 
     const filteredRobots = robots.filter(robot => {
       return robot.name.toLowerCase().includes(searchField.toLowerCase())
@@ -33,6 +41,7 @@ class App extends Component{
     return(
       <div className='tc'>
         <h1 className='header'>Robofriends</h1>
+        <h5>{time.toLocaleTimeString()}</h5>
         <SearchBox searchChange={this.onSearchChange}/>
         <ScrollBar>
           <CardList robots={filteredRobots}/>
