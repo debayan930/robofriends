@@ -38,7 +38,8 @@ class App extends Component{
       return robot.name.toLowerCase().includes(searchField.toLowerCase())
     });
 
-    return(
+    return !robots.length?<h1 className='tc'>Loading...</h1>:
+    (
       <div className='tc'>
         <h1 className='header'>Robofriends</h1>
         <h5>{time.toLocaleTimeString()}</h5>
